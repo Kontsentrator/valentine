@@ -2,8 +2,8 @@ const HEART_RENDER_TIMEOUT = 5000;
 const HEART_RENDER_INTERVAL = 200;
 const HEART_SYMBOLS = ['❤️', '💖', '💝', '💕'];
 
-const COUPLE_IMAGE_SRC = 'assets/images/couple.png';
-const CAT_WITH_FLOWER_IMAGE_SRC = 'assets/images/cat-with-flower.png';
+const COUPLE_IMAGE_SRC = 'assets/images/couple.webp';
+const CAT_WITH_FLOWER_IMAGE_SRC = 'assets/images/cat-with-flower.webp';
 
 const handleDOMContentLoaded = () => {
     const envelopeWrapper = document.getElementById('envelope-wrapper');
