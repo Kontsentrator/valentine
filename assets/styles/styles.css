@@ -1,0 +1,252 @@
+:root {
+    --background-color-1: #ffeef2;
+    --background-color-2: #ff4d6d;
+    --background-color-3: #f08080;
+    --background-color-4: #e57373;
+    --background-color-5: #ffffff;
+    --text-color-1: var(--background-color-2);
+    --text-color-2: var(--background-color-5);
+    --shadow-color-1: rgba(0, 0, 0, 0.1);
+    --shadow-color-2: rgba(0, 0, 0, 0.2);
+
+    --spacing-1x: 4px;
+    --spacing-2x: 8px;
+    --spacing-3x: 12px;
+    --spacing-4x: 16px;
+    --spacing-5x: 20px;
+
+    --border-radius-1x: 4px;
+    --border-radius-2x: 8px;
+    --border-radius-4x: 16px;
+    --border-radius-5x: 20px;
+    --border-radius-full: 9999px;
+
+    --transition-1: 300ms;
+    --transition-2: 500ms;
+    --transition-3: 800ms;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--color-background);
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+}
+
+/* --- КОНВЕРТ --- */
+
+.envelope-wrapper {
+    position: relative;
+    transition: transform var(--transition-1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.envelope-wrapper:not(.opened) {
+    cursor: pointer;
+}
+
+.envelope-wrapper:not(.opened):hover {
+    transform: scale(1.05);
+}
+
+.envelope-wrapper>.envelope {
+    --envelope-border-side-width: 140px;
+    --envelope-border-top-width: 100px;
+
+    position: relative;
+    width: 280px;
+    height: 180px;
+    background: var(--background-color-3);
+    border-radius: 0 0 var(--border-radius-2x) var(--border-radius-2x);
+    box-shadow: 0 10px 30px var(--shadow-color-1);
+}
+
+/* Верхний клапан конверта */
+
+.envelope-wrapper>.envelope::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    border-left: var(--envelope-border-side-width) solid transparent;
+    border-right: var(--envelope-border-side-width) solid transparent;
+    border-top: var(--envelope-border-top-width) solid var(--background-color-4);
+    transform-origin: top;
+    transition: transform var(--transition-2) ease;
+}
+
+.envelope-wrapper>.title {
+    margin-bottom: var(--spacing-5x);
+    font-size: 1.5rem;
+    color: var(--text-color-1);
+    font-weight: bold;
+    animation: bounce 2s infinite;
+}
+
+.envelope-wrapper>.envelope>.text {
+    position: absolute;
+    bottom: var(--spacing-4x);
+    right: var(--spacing-5x);
+    color: var(--text-color-2);
+    font-size: 1.2rem;
+    transform: rotate(-8deg);
+}
+
+/* Состояние при открытии */
+
+.envelope-wrapper.opened>.envelope::before {
+    transform: rotateX(180deg);
+    z-index: 0;
+}
+
+/* --- МОДАЛЬНОЕ ОКНО С ВОПРОСОМ --- */
+
+.envelope-wrapper>.modal {
+    position: absolute;
+    bottom: 0;
+    width: 400px;
+    background: var(--background-color-5);
+    padding: var(--spacing-5x) var(--spacing-5x) 50px var(--spacing-5x);
+    text-align: center;
+    border-radius: var(--border-radius-4x);
+    transition: all var(--transition-3) ease;
+    z-index: 1;
+    opacity: 0;
+    transform: scale(0.5);
+    visibility: hidden;
+    will-change: transform;
+}
+
+.envelope-wrapper.opened>.modal {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(-100px) scale(1);
+    z-index: 5;
+    box-shadow: 0 10px 40px var(--shadow-color-2);
+}
+
+/* Контент внутри карточки */
+
+.envelope-wrapper>.modal>.image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: var(--border-radius-2x);
+}
+
+.envelope-wrapper>.modal>.title {
+    font-size: 1.3rem;
+    color: var(--text-color-1);
+    margin: var(--spacing-4x) 0 calc(var(--spacing-4x) * 2) 0;
+}
+
+.button {
+    position: absolute;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2x);
+    padding: var(--spacing-2x) var(--spacing-5x);
+    border: none;
+    border-radius: var(--border-radius-5x);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.button.agree {
+    background-color: var(--background-color-2);
+    color: var(--text-color-2);
+    bottom: var(--spacing-4x);
+    left: calc(50% - var(--spacing-2x));
+    transform: translateX(-100%);
+}
+
+.button.reject {
+    background-color: #adb5bd;
+    color: var(--text-color-2);
+    bottom: var(--spacing-4x);
+    right: calc(50% - var(--spacing-2x));
+    transform: translateX(100%);
+    transition: inset var(--transition-1);
+}
+
+/* --- ЭКРАН УСПЕХА --- */
+
+.success-screen,
+.failure-screen {
+    text-align: center;
+    animation: fadeIn 1s;
+}
+
+.success-screen>.image,
+.failure-screen>.image {
+    --image-size: 300px;
+
+    width: var(--image-size);
+    height: var(--image-size);
+    object-fit: cover;
+    border-radius: var(--border-radius-5x);
+}
+
+.success-screen>.title,
+.failure-screen>.title {
+    font-size: 2.5rem;
+}
+
+.success-screen>.text,
+.failure-screen>.text {
+    font-size: 1.2rem;
+    color: var(--text-color-1);
+}
+
+.heart {
+    position: absolute;
+    top: -10vh;
+    pointer-events: none;
+    animation: fall linear forwards;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes bounce {
+
+    from,
+    to {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}

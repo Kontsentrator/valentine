@@ -1,39 +1,46 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Тебе пришло сообщение! ❤️</title>
 
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="assets/styles/styles.css" />
 
     <script defer src="scripts.js"></script>
 </head>
+
 <body>
     <!-- Шаг 1: Конверт -->
-    <div id="envelopeWrapper" class="envelopeWrapper">
-        <div class="envelopeText">Тебе пришло письмо! 💌</div>
-        <div class="envelope"></div>
-        
+    <div id="envelope-wrapper" class="envelope-wrapper">
+        <div class="title">Тебе пришло письмо! 💌</div>
+        <div class="envelope">
+            <p class="text">Насте</p>
+        </div>
+
         <!-- Шаг 2: Карточка внутри (вылетает) -->
-        <div class="card" id="mainCard">
-            <div class="gif-container">
-                <img src="https://media.tenor.com/j6N0vV4fO8IAAAAi/peach-goma.gif" alt="Котик">
-            </div>
-            <h1>Ты будешь моей валентинкой? ❤️</h1>
-            <div class="buttons">
-                <button id="yesBtn">ДА</button>
-                <button id="noBtn">НЕТ</button>
-            </div>
+        <div id="main-card" class="modal">
+            <img class="image" src="assets/images/cat-thinking.png" alt="Котик">
+            <h1 class="title">Ты будешь моей валентинкой? ❤️</h1>
+            <button id="button-agree" class="button agree">Да</button>
+            <button id="button-reject" class="button reject">Нет</button>
         </div>
     </div>
 
     <!-- Шаг 3: Финальный экран -->
-    <div class="success-screen" id="successScreen">
-        <img src="https://media.tenor.com/9vYmC0z_RscAAAAi/goma-happy.gif" alt="Ура!">
-        <h1 style="font-size: 2.5rem;">УРААА! 💖✨</h1>
-        <p style="font-size: 1.2rem; color: #d63384;">Я так счастлив(а)! Это будет лучший день!</p>
+    <div id="success-screen" class="success-screen hidden">
+        <img id="success-screen-image" class="image" src="assets/images/cat-with-flower.png" alt="Ура!">
+        <h1 class="title">УРААА! 💖✨</h1>
+        <p class="text">Это будет лучший день!</p>
+    </div>
+
+    <div id="failure-screen" class="failure-screen hidden">
+        <img class="image" src="assets/images/cat-confused.png" alt="Это как?" />
+        <h1 class="title">Это как?</h1>
+        <p class="text">Самая быстрая рука на диком западе</p>
     </div>
 </body>
+
 </html>
